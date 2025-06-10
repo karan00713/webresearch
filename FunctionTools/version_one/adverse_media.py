@@ -17,7 +17,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 AZURE_SUBSCRIPTION_KEY = os.getenv("AZURE_SUBSCRIPTION_KEY")
 AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT")
 AZURE_EMBEDDING_DEPLOYMENT_NAME = os.getenv("AZURE_EMBEDDING_DEPLOYMENT_NAME")
@@ -27,13 +26,9 @@ OPENAI_API_VERSION = os.getenv("OPENAI_API_VERSION")
 
 chat = AzureOpenAIConnector().connect_azure_open_ai("gpt-4o-mini")
 
-from langchain_openai import ChatOpenAI
+from langchain_openai import AzureChatOpenAI
 
-llm = ChatOpenAI(
-    openai_api_base="https://api.openai.com/v1",
-    openai_api_key=os.getenv("OPENAI_API_KEY"),
-    model_name="gpt-4o-mini",
-)
+llm = AzureChatOpenAI(model="gpt-4o-mini", temperature=0)
 
 def generate_search_queries(company, country, data_dir):
     try:
@@ -465,7 +460,7 @@ def analyze_sentiment_by_tag(df):
     
     return result_df
 
-def process_additional_research(state: State):
+def adverse_media_analysis(state: State) -> State:
         # Generate search queries
     company_name = state["company_name"]
     country = state['country'] or ""

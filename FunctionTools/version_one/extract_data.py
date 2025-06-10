@@ -1,9 +1,10 @@
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
+from langchain_openai import AzureChatOpenAI
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import PromptTemplate
 from pyobjects.pyobj import State
 
-model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+model = AzureChatOpenAI(model="gpt-4o-mini", temperature=0)
 parser = JsonOutputParser()
 
 # Step 5: LLM Prompt for Structured Extraction
@@ -27,8 +28,6 @@ Return the data in this exact JSON format and DO NOT include any other text:
   "Phone": "",
   "Website": "",
   "General Details": "",
-  "Directors & Shareholders": [],
-  "UBO (Ultimate Beneficial Owner)": "",
   "Subsidiaries": [],
   "Parent Company": "",
   "Last Reported Revenue": ""

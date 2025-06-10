@@ -28,11 +28,12 @@ if submitted and company_name and country:
             result = app.invoke(state)
             end_time = time.time()
             elapsed_time = end_time - start_time
+            elapsed_minutes = elapsed_time / 60
             structured_data = result.get("structured_data", {})
 
             st.success("✅ Extraction complete!")
             st.subheader("📋 Structured Company Data")
-            st.write(f"🕒 Time taken: {elapsed_time:.2f} seconds")
+            st.write(f"🕒 Time taken: {elapsed_minutes:.2f} minutes")
             for key, value in structured_data.items():
                 st.markdown(f"**{key}**: {value if value else 'N/A'}")
             if "source_list" in result and result["source_list"]:
@@ -58,6 +59,54 @@ if submitted and company_name and country:
             # Display markdown content
             st.header("Summary")
             st.markdown(final_data["markdown_content"])
+            
+            # PEP and Sanction Data
+            st.header("PEP and Sanction")
+            st.write(final_data["pep_sanction_analysis"])
+            
+            # Litigation History
+            st.header("Litigation History")
+            st.write(final_data["litigation_history"]) 
+            
+            # Regulatory Compliance
+            st.header("Regulatory Compliance")
+            st.write(final_data["regulatory_compliance"])
+            
+            # Major Customers
+            st.header("Major Customers")
+            st.write(final_data["major_customers"])
+            
+            # Suppliers and Vendors
+            st.header("Suppliers and Vendors")
+            st.write(final_data["suppliers_vendors"])
+            
+            # Market Share
+            st.header("Market Share")
+            st.write(final_data["market_share"])
+            
+            # ESG Score
+            st.header("ESG Score")
+            st.write(final_data["esg_score"])
+            
+            # Intellectual Property
+            st.header("Intellectual Property")
+            st.write(final_data["intellectual_property"])
+            
+            # Management Changes
+            st.header("Management Changes")
+            st.write(final_data["management_changes"])
+            
+            # Geographic Risk Assessment
+            st.header("Geographic Risk Assessment")
+            st.write(final_data["geographic_risk_assessment"])
+            
+            # Industry Risk Assessment
+            st.header("Industry Risk Assessment")
+            st.write(final_data["industry_risk_assessment"])
+            
+            # Competitors Analysis
+            st.header("Competitors Analysis")
+            st.write(final_data["competitors_analysis"])
 
         except Exception as e:
             st.error(f"❌ An error occurred: {e}")

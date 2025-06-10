@@ -2,7 +2,7 @@ from langchain.tools.tavily_search import TavilySearchResults
 from pyobjects.pyobj import State
 
 tavily_tool = TavilySearchResults(k=10)
-def search_with_tavily(state: State) -> State:
+def basic_details(state: State) -> State:
     try:
         query = f"Company details of {state['company_name']} in {state['country']}"
         tavily_result = tavily_tool.invoke({"query": query})
